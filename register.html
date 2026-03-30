@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+  <h3 class="mb-4">Register Student</h3>
+  <form id="form">
+    <input type="text" id="name" class="form-control mb-3" placeholder="Student Name" required>
+    <input type="text" id="course" class="form-control mb-3" placeholder="Course" required>
+    <input type="date" id="date" class="form-control mb-3" required>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <a href="app.html" class="btn btn-secondary">Back</a>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById("form");
+  let students = JSON.parse(localStorage.getItem("students")) || [];
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = {
+      name: document.getElementById("name").value,
+      course: document.getElementById("course").value,
+      date: document.getElementById("date").value
+    };
+    ajaxPost(data);
+  });
+
+  function ajaxPost(data) {
+    console.log("Fake AJAX POST:", data);
+    setTimeout(() => {
+      students.push(data);
+      localStorage.setItem("students", JSON.stringify(students));
+      form.reset();
+      alert("Student registered successfully!");
+    }, 300);
+  }
+</script>
+</body>
+</html>
